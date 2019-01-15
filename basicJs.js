@@ -30,12 +30,15 @@ if(!checkName())
 		i++;
 	}
 
-
-
-
 	return valid;
 }
 
+/**
+ * checkEmail()
+ * Checks if the email is valid.
+ *
+ * @returns {boolean}
+ */
 function checkEmail(){
 	var email = document.getElementById("email").value;
 	var validate = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.com$/
@@ -49,7 +52,12 @@ function checkEmail(){
 	}
 }
 
-
+/**
+ * checkName()
+ * Checks if the name is valid.
+ *
+ * @returns {boolean}
+ */
 function checkName(){
 	var name = document.getElementById("name").value;
 	var nameValid = true;
