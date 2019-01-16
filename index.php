@@ -84,7 +84,7 @@ if(!empty($_POST)){
         </span>
     </div>
     <br>
-    <input type="submit" value="Submit">
+    <input type="submit" value="Submit" id="submit">
 </form>
 
 </html>
