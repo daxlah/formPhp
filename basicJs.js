@@ -8,9 +8,7 @@
 function validateForm(form) {
 	var valid = true;
 
-
-	if(valid)
-		valid = checkEmail();
+    checkFile();
 
 	return valid;
 }
@@ -63,5 +61,7 @@ function checkEmail(){
 }
 
 function checkFile(){
-
+	var file = document.getElementById("browsePhoto").value;
+	var extension = file.split(file.lastIndexOf(".")).pop();
+	console.log(extension);
 }

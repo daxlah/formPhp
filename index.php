@@ -79,7 +79,7 @@ if(!empty($_POST)){
         <br>
         <span>
             <label for="browsePhoto">Photo</label>
-            <input type="file" id="browsePhoto" name="browsePhoto">
+            <input type="file" id="browsePhoto" name="browsePhoto" required>
             <span class="error" id="errorImage">Please select an image</span>
         </span>
     </div>
