@@ -34,7 +34,7 @@ if(!empty($_POST)){
 
 
     }else{
-        echo "file not found";
+        echo "photo not found";
     }
 
     //write file into directory
@@ -61,20 +61,20 @@ if(!empty($_POST)){
     <div class = "fields">
         <div>
             <label for="name">Name</label>
-            <input type="text" id="name" name="name">
-            <span class="error" id="errorName">Please enter a valid name</span>
+            <input type="text" id="name" name="name" required>
+            <span class="error" id="errorName">Format: Xxxxx</span>
             <br>
 
         </div>
         <p>
             <label for="email">Email</label>
-            <input tpye="text" id="email" name="email">
-            <span class="error" id="errorEmail">Please enter a valid email</span>
+            <input tpye="text" id="email" name="email" required>
+            <span class="error" id="errorEmail">Format: ***@***.com</span>
         </p>
         <p>
             <label for="message">Message</label>
-            <textarea id="message" name="message"></textarea>
-            <span class="error" id="errorMessage">Please enter a valid message</span>
+            <textarea id="message" name="message" required></textarea>
+            <span class="error" id="errorMessage"></span>
         </p>
         <br>
         <span>

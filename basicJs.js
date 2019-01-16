@@ -1,57 +1,18 @@
-/*
-18966318
-Jenny Zhan
-Tuesday 12pm
-*/
-
-function validateForm(form) {
-	var valid = true;
-	var i = 0;
-	var functionArrayNames = [checkEmail(), checkName()];
-
-/*
-if(!checkEmail())
-  valid = false;
-
-if(!checkName())
- valid = false;
-*/
-
-	/*
-    checkMessage
-    checkPhoto(?)
-  */
-
-
-	/*
-	for(var i = 0; i < functionArrayNames.length(); i++){
-		if(!functionArrayNames)
-			valid = false;
-
-		i++;
-	}
-	*/
-
-	return valid;
-}
-
 /**
- * checkEmail()
- * Checks if the email is valid.
+ * validateForm(form)
+ * Main function called by form.
  *
+ * @param form
  * @returns {boolean}
  */
-function checkEmail(){
-	var email = document.getElementById("email").value;
-	var validate = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.com$/
+function validateForm(form) {
+	var valid = true;
 
-	if(validate.test(String(email))){
-		document.getElementById("errorEmail").style.display = "none";
-		return true;
-	}else{
-		document.getElementById("errorEmail").style.display = "inline";
-		return false;
-	}
+
+	if(valid)
+		valid = checkEmail();
+
+	return valid;
 }
 
 /**
@@ -61,16 +22,46 @@ function checkEmail(){
  * @returns {boolean}
  */
 function checkName(){
-	var name = document.getElementById("name").value;
-	var nameValid = true;
+    var name = document.getElementById("name").value;
+    var nameValid = true;
+    console.log(name);
 
-	if(/[A-Z]/.test(name[0])){
-		document.getElementById("errorFirstName").style.display = "none";
+    if(/[A-Z]{1}[a-z']/.test(name[0])){
+        document.getElementById("errorName").style.display = "none";
+        console.log("valid name");
+    }else{
+        document.getElementById("errorName").style.display = "inline";
+        console.log("invalid name");
+        nameValid = false;
+    }
+
+    return nameValid;
+
+}
+
+
+/**
+ * checkEmail()
+ * Checks if the email is valid.
+ *
+ * @returns {boolean}
+ */
+function checkEmail(){
+	var email = document.getElementById("email").value;
+	console.log(email);
+	var validate = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.com$/
+
+	if(validate.test(String(email))){
+		document.getElementById("errorEmail").style.display = "none";
+		console.log("valid email");
+		return true;
 	}else{
-		document.getElementById("errorFirstName").style.display = "inline";
-		nameValid = false;
+		document.getElementById("errorEmail").style.display = "inline";
+        console.log("invalid email");
+		return false;
 	}
+}
 
-	return nameValid;
+function checkFile(){
 
 }
