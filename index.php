@@ -26,7 +26,6 @@ if(!empty($_POST)){
 
         //get file type
         $fileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-        echo pathinfo($target_file, PATHINFO_EXTENSION);
 
         //upload file
         if(move_uploaded_file($_FILES['browsePhoto']['tmp_name'],
@@ -46,37 +45,42 @@ if(!empty($_POST)){
     fclose($file);
 
 
+}else{
+    echo "no value entered";
 }
-
 
 ?>
 
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="basicCss.css">
+    <script src="basicJs.js"></script>
 </head>
 
-<form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post" id="mainForm" enctype="multipart/form-data">
+<form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post" id="mainForm" enctype="multipart/form-data" onsubmit="return validateForm(this)">
     <div class = "fields">
-        <p>
+        <div>
             <label for="name">Name</label>
             <input type="text" id="name" name="name">
+            <span class="error" id="errorName">Please enter a valid name</span>
             <br>
-            <br>
-            <span class="error" id="errorName">Please enter a name</span>
-        </p>
+
+        </div>
         <p>
             <label for="email">Email</label>
             <input tpye="text" id="email" name="email">
+            <span class="error" id="errorEmail">Please enter a valid email</span>
         </p>
         <p>
             <label for="message">Message</label>
             <textarea id="message" name="message"></textarea>
+            <span class="error" id="errorMessage">Please enter a valid message</span>
         </p>
         <br>
         <span>
             <label for="browsePhoto">Photo</label>
             <input type="file" id="browsePhoto" name="browsePhoto">
+            <span class="error" id="errorImage">Please select an image</span>
         </span>
     </div>
     <br>

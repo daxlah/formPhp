@@ -1,6 +1,6 @@
 /*
 18966318
-Jenny Zhang
+Jenny Zhan
 Tuesday 12pm
 */
 
@@ -23,12 +23,14 @@ if(!checkName())
   */
 
 
+	/*
 	for(var i = 0; i < functionArrayNames.length(); i++){
 		if(!functionArrayNames)
 			valid = false;
 
 		i++;
 	}
+	*/
 
 	return valid;
 }

@@ -18,12 +18,15 @@
     width: 60%;
 }
 
+
 .error{
     /*display: none;*/
-    border-radius: 10px;
+    border-radius: 5px;
     padding: 10px;
-    background-color: #ffd0d0;
-    border-style: solid;
-    border-color: red;
+    background-color: #ffe2e2;
+    color:#a30101;
+    border:1px solid #ff0000;
+    width: 95%;
+    margin-top:5px;
+    margine-bottom:20px;
 }
-
