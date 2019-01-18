@@ -12,13 +12,13 @@ label{
     display: inline-block;
     float: left;
     clear: left;
-    width: 250px;
+    width: 150px;
 }
 
 #mainForm{
     margin-top:20px;
     margin-left:20px;
-    width: 40%;
+    width: 50%;
 
 }
 
@@ -31,10 +31,9 @@ label{
 .fields input,.fields textarea {
     display: inline-block;
     float: left;
-    width: 25%;
+    width: 35%;
     margin: 10px;
 }
-
 
 .error{
     display: none;

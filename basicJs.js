@@ -6,9 +6,15 @@
  * @returns {boolean}
  */
 function validateForm(form) {
-	var valid = true;
 
-    checkFile();
+	var valid = checkName();
+
+	if(!checkEmail())
+	    valid = false;
+
+
+	if(!checkFile())
+	    valid = false;
 
 	return valid;
 }
@@ -24,7 +30,8 @@ function checkName(){
     var nameValid = true;
     console.log(name);
 
-    if(/[A-Z]{1}[a-z']/.test(name[0])){
+    //if(/[A-Z]{1}[a-z']/.test(name[0])){
+    if(name.match(/[A-Z]{1}[a-z']$/i)) {
         document.getElementById("errorName").style.display = "none";
         console.log("valid name");
     }else{
@@ -62,6 +69,19 @@ function checkEmail(){
 
 function checkFile(){
 	var file = document.getElementById("browsePhoto").value;
-	var extension = file.split(file.lastIndexOf(".")).pop();
-	console.log(extension);
+
+    var extension = file.split('.').pop();
+
+
+	if(extension.match(/(jpg|jpeg|png|gif)$/i)) {
+        document.getElementById("errorImage").style.display = "none";
+        console.log("Is an image");
+        return true;
+    }else{
+        document.getElementById("errorImage").style.display = "inline";
+        console.log("Is an not an image");
+        return false;
+    }
+
+
 }
