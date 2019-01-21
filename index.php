@@ -1,4 +1,3 @@
-
 <?php
 /*
  *
@@ -11,6 +10,15 @@ if(!empty($_POST)){
     $email = $_POST["email"];
     $message = $_POST["message"];
 
+
+    //todo: validation section: Name, Email, Message, Photo
+
+
+
+
+    /**
+     * Validation is successful ---------------------------------------------------
+     */
     //folder names
     $fileName = $name . "-" . date("Y\-m\-d\-G\-i\-s");
     $uploads_folder = "uploads";
@@ -30,11 +38,11 @@ if(!empty($_POST)){
         //upload file
         if(move_uploaded_file($_FILES['browsePhoto']['tmp_name'],
             $target_dir.DIRECTORY_SEPARATOR . $fileName . "." . $fileType))
-        echo "Upload success";
+            echo "<br> Upload success";
 
 
     }else{
-        echo "photo not found";
+        echo "<br> photo not found";
     }
 
     //write file into directory
@@ -51,15 +59,33 @@ if(!empty($_POST)){
 
 ?>
 
+
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="basicCss.css">
+    <!-- JAVASCRIPT VALIDATION SECTION
     <script src="basicJs.js"></script>
-</head>
+    -->
+    <script>
+        <?php
+            //checkName
+            if(!preg_match("/[A-Z]{1}[a-z']$/i", $name)){
+                echo "#errorName {
+                            display: inline;
+                        }";
+            }else{
+                echo "#errorName {
+                            display: none;
+                        }";
+            }
+        ?>
+    </script>
 
-<form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post" id="mainForm" enctype="multipart/form-data" onsubmit="return validateForm(this)">
+<form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post" id="mainForm" enctype="multipart/form-data"
+      onsubmit="return validateForm(this)">
     <div class = "fields">
         <div>
+
             <label for="name">Name</label>
             <input type="text" id="name" name="name" required>
             <span class="error" id="errorName">Format: Xxxxx</span>
@@ -88,3 +114,5 @@ if(!empty($_POST)){
 </form>
 
 </html>
+
+
