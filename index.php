@@ -11,14 +11,28 @@ if(!empty($_POST)){
     $message = $_POST["message"];
 
 
-    //todo: validation section: Name, Email, Message, Photo
+    //todo: validation section: Email, Message, Photo
+
+
+    $checks = array(1, 1, 1, 1);
+    $fields = array("Name", "Email", "Message", "Image");
+
+
+    //checkName
+    if(!preg_match("/[A-Z]{1}[a-z']$/i", $name))
+        $checks[0] = 0;
+
+    //email
+    if(!preg_match("/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.com$/", $email))
+        $checks[1] = 0;
+
+    //message
+    if($message == "")
+        $checks[2] = 0;
 
 
 
 
-    /**
-     * Validation is successful ---------------------------------------------------
-     */
     //folder names
     $fileName = $name . "-" . date("Y\-m\-d\-G\-i\-s");
     $uploads_folder = "uploads";
@@ -27,7 +41,6 @@ if(!empty($_POST)){
     mkdir ($uploads_folder . DIRECTORY_SEPARATOR . $fileName, 0755);
 
     if(!empty($_FILES["browsePhoto"]["name"])) {
-
         //upload file
         $target_dir = $uploads_folder . DIRECTORY_SEPARATOR . $fileName;
         $target_file = $target_dir . basename($_FILES["browsePhoto"]["name"]);
@@ -35,14 +48,35 @@ if(!empty($_POST)){
         //get file type
         $fileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
-        //upload file
-        if(move_uploaded_file($_FILES['browsePhoto']['tmp_name'],
-            $target_dir.DIRECTORY_SEPARATOR . $fileName . "." . $fileType))
-            echo "<br> Upload success";
+        //validate image
+        if(!preg_match("/(jpg|jpeg|png|gif)$/i", $fileType))
+            $checks[3] = 0;
+
+
 
 
     }else{
         echo "<br> photo not found";
+        $checks[3] = 0;
+    }
+
+    /**
+     * Checking Errors  ---------------------------------------------------
+     */
+
+    $validForm = true;
+    for($i = 0; i < count($checks); $i++){
+        if($checks[$i] == 0) {
+            $validForm = false;
+
+        }
+    }
+
+    if($validForm) {
+        //upload file
+        if(move_uploaded_file($_FILES['browsePhoto']['tmp_name'],
+            $target_dir.DIRECTORY_SEPARATOR . $fileName . "." . $fileType))
+            echo "<br> Upload success";
     }
 
     /**
@@ -58,7 +92,10 @@ if(!empty($_POST)){
     /**
      *  Write into userFile.csv
      */
-
+    $cvsData = $name . "," . $email . "," . $message  . "," . $target_dir.DIRECTORY_SEPARATOR . $fileName . "." . $fileType . "\n";
+    $fp = fopen("userFile.csv","a");
+    fwrite($fp, $cvsData);
+    fclose($fp);
 
 }else{
     echo "no value entered";
@@ -73,23 +110,30 @@ if(!empty($_POST)){
     <!-- JAVASCRIPT VALIDATION SECTION
     <script src="basicJs.js"></script>
     -->
-    <script>
-        <?php
-            //checkName
-            if(!preg_match("/[A-Z]{1}[a-z']$/i", $name)){
+    <?php
+        $validForm = true;
+        for($i = 0; i < count($checks); $i++){
+            if($checks[$i] == 0) {
+                $validForm = false;
+
                 echo "  <style type=\"text/css\">
-                        #errorName {
-                            display: inline;
-                        }
-                        </style>";
+                    #error" . $fields[$i] .
+                    " {
+                        display: inline;
+                    }
+                    </style>";
+
             }else{
-                echo "#errorName {
-                            display: none;
-                        }";
+                echo "  <style type=\"text/css\">
+                    #error" . $fields[$i] .
+                     "{
+                        display: none;
+                    }
+                    </style>";
             }
-        ?>
         }
-    </script>
+    ?>
+</head>
 
 <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post" id="mainForm" enctype="multipart/form-data"
       onsubmit="return validateForm(this)">

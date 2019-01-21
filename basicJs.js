@@ -67,6 +67,12 @@ function checkEmail(){
 	}
 }
 
+/**
+ * checkFile()
+ * Checks if the file is an image.
+ *
+ * @returns {boolean}
+ */
 function checkFile(){
 	var file = document.getElementById("browsePhoto").value;
 
