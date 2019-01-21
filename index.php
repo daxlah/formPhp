@@ -45,12 +45,19 @@ if(!empty($_POST)){
         echo "<br> photo not found";
     }
 
-    //write file into directory
+    /**
+     * write file into directory ---------------------------------------------------
+     */
     $file = fopen($uploads_folder . DIRECTORY_SEPARATOR . $fileName . DIRECTORY_SEPARATOR
         . $fileName . ".txt", "w");
     $msg = $name . ", " . $email . ", " . $message;
     fwrite($file, $msg);
     fclose($file);
+
+
+    /**
+     *  Write into userFile.csv
+     */
 
 
 }else{
@@ -70,15 +77,18 @@ if(!empty($_POST)){
         <?php
             //checkName
             if(!preg_match("/[A-Z]{1}[a-z']$/i", $name)){
-                echo "#errorName {
+                echo "  <style type=\"text/css\">
+                        #errorName {
                             display: inline;
-                        }";
+                        }
+                        </style>";
             }else{
                 echo "#errorName {
                             display: none;
                         }";
             }
         ?>
+        }
     </script>
 
 <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post" id="mainForm" enctype="multipart/form-data"
