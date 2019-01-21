@@ -11,7 +11,7 @@ if(!empty($_POST)){
     $message = $_POST["message"];
 
 
-    $checks = array(1, 1, 1, 1);
+    $checks = array(0, 0, 0, 0);
     $fields = array("Name", "Email", "Message", "Image");
 
 
@@ -58,7 +58,9 @@ if(!empty($_POST)){
      */
 
     $validForm = true;
-    for($i = 0; i < count($checks); $i++){
+
+    for($i = 0; $i < count($checks); $i++){
+
         if($checks[$i] == 0) {
             $validForm = false;
 
@@ -103,9 +105,11 @@ if(!empty($_POST)){
     <!-- JAVASCRIPT VALIDATION SECTION
     <script src="basicJs.js"></script>
     -->
+
+
     <?php
         $validForm = true;
-        for($i = 0; i < count($checks); $i++){
+        for($i = 0; $i < count($checks); $i++){
             if($checks[$i] == 0) {
                 $validForm = false;
 
@@ -125,6 +129,7 @@ if(!empty($_POST)){
                     </style>";
             }
         }
+
     ?>
 </head>
 
