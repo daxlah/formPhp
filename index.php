@@ -1,6 +1,6 @@
 <?php
 /*
- *
+ * todo: testing/fixing
  *
  */
 
@@ -9,9 +9,6 @@ if(!empty($_POST)){
     $name = $_POST["name"];
     $email = $_POST["email"];
     $message = $_POST["message"];
-
-
-    //todo: validation section: Email, Message, Photo
 
 
     $checks = array(1, 1, 1, 1);
@@ -51,10 +48,6 @@ if(!empty($_POST)){
         //validate image
         if(!preg_match("/(jpg|jpeg|png|gif)$/i", $fileType))
             $checks[3] = 0;
-
-
-
-
     }else{
         echo "<br> photo not found";
         $checks[3] = 0;
