@@ -83,10 +83,38 @@ if($validForm){
     /**
      *  Write into userFile.csv
      */
-    $cvsData = $name . "," . $email . "," . $message  . "," . $target_dir.DIRECTORY_SEPARATOR . $fileName . "." . $fileType . "\n";
+    $cvsData = $name . "," . $email . "," . $message  . "," . $target_dir.DIRECTORY_SEPARATOR . $fileName . "." . $fileType;
     $fp = fopen("userFile.csv","a");
-    fwrite($fp, $cvsData);
+    fwrite($fp, $cvsData . "\n");
     fclose($fp);
+
+    /**
+     *  Write into database
+     * todo: save data into database
+     */
+    $sql = "INSERT INTO table1 (name, email, message, imageDirectory) VALUES ('$name', '$email', '$message', '$cvsData')";
+
+
+    $statement = $conn->prepare("INSERT INTO 
+                                            table1 
+                                                (name, email, message, imageDirectory) 
+                                            VALUES 
+                                                (:name, :email, :message, :imageDirectory)
+                               ");
+
+    $statement->bindValue(':name', $name);
+    $statement->bindValue(':email', $email);
+    $statement->bindValue(':message', $message);
+    $statement->bindValue(':imageDirectory', $imageDirectory);
+
+
+    if ($statement->execute()){
+
+    }else{
+        echo "query failed";
+    }
+
+
 }else{
     echo "Please fix the errors listed.";
 }
@@ -101,6 +129,7 @@ $conn = null;
     <link rel="stylesheet" type="text/css" href="basicCss.css">
     <!-- JAVASCRIPT VALIDATION SECTION -->
     <script src="basicJs.js"></script>
+    <title>Weeee</title>
 </head>
 
 <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post" id="mainForm" enctype="multipart/form-data"
