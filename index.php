@@ -4,76 +4,73 @@
  *
  */
 
+$validForm = true;
 
-if(!empty($_POST)){
+
+
+
+//check name
+if(!empty($_POST['name']) || preg_match("/[A-Z]{1}[a-z']$/i", $_POST['name'])){
     $name = $_POST["name"];
+}else{
+    echo "Invalid name<br>";
+    $validForm = false;
+}
+
+//check email
+if(!empty($_POST['email']) || preg_match("/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.com$/", $_POST["email"])){
     $email = $_POST["email"];
+}else{
+    echo "Invalid email<br>";
+    $validForm = false;
+}
+
+//check message
+if(!empty($_POST['message'])){
     $message = $_POST["message"];
+}else{
+    echo "No value entered in message<br>";
+    $validForm = false;
+}
 
 
-    $checks = array(0, 0, 0, 0);
-    $fields = array("Name", "Email", "Message", "Image");
+//check photo
+if(!empty($_FILES) && file_exists($_FILES['browsePhoto']['tmp_name']) && $validForm == true) {
+    $filename = $_FILES['browsePhoto']['name'];
+    //get file type
+    $fileType = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+    //validate image
+    if(preg_match("/(jpg|jpeg|png|gif)$/i", $fileType)){
+        //folder names
+        $fileName = $name . "-" . date("Y\-m\-d\-G\-i\-s");
+        $uploads_folder = "uploads";
 
+        //create folder if doesnt exist
+        mkdir ($uploads_folder . DIRECTORY_SEPARATOR . $fileName, 0755);
 
-    //checkName
-    if(!preg_match("/[A-Z]{1}[a-z']$/i", $name))
-        $checks[0] = 0;
-
-    //email
-    if(!preg_match("/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.com$/", $email))
-        $checks[1] = 0;
-
-    //message
-    if($message == "")
-        $checks[2] = 0;
-
-
-
-
-    //folder names
-    $fileName = $name . "-" . date("Y\-m\-d\-G\-i\-s");
-    $uploads_folder = "uploads";
-
-    //create folder if doesnt exist
-    mkdir ($uploads_folder . DIRECTORY_SEPARATOR . $fileName, 0755);
-
-    if(!empty($_FILES["browsePhoto"]["name"])) {
         //upload file
         $target_dir = $uploads_folder . DIRECTORY_SEPARATOR . $fileName;
         $target_file = $target_dir . basename($_FILES["browsePhoto"]["name"]);
 
-        //get file type
-        $fileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-
-        //validate image
-        if(!preg_match("/(jpg|jpeg|png|gif)$/i", $fileType))
-            $checks[3] = 0;
-    }else{
-        echo "<br> photo not found";
-        $checks[3] = 0;
-    }
-
-    /**
-     * Checking Errors  ---------------------------------------------------
-     */
-
-    $validForm = true;
-
-    for($i = 0; $i < count($checks); $i++){
-
-        if($checks[$i] == 0) {
-            $validForm = false;
-
-        }
-    }
-
-    if($validForm) {
-        //upload file
         if(move_uploaded_file($_FILES['browsePhoto']['tmp_name'],
-            $target_dir.DIRECTORY_SEPARATOR . $fileName . "." . $fileType))
-            echo "<br> Upload success";
+            $target_dir.DIRECTORY_SEPARATOR . $fileName . "." . $fileType)) {
+            echo "Upload success<br>";
+        }else{
+            echo "Something went wrong when uploading the file<br>";
+            $validForm = false;
+        }
+
+    }else{
+        echo "File uploaded is not an image<br>";
+        $validForm = false;
     }
 
+}else{
+    echo "File not found<br>";
+    $validForm = false;
+}
+
+if($validForm){
     /**
      * write file into directory ---------------------------------------------------
      */
@@ -91,10 +88,10 @@ if(!empty($_POST)){
     $fp = fopen("userFile.csv","a");
     fwrite($fp, $cvsData);
     fclose($fp);
-
 }else{
-    echo "no value entered";
+    echo "Please fix the errors listed.";
 }
+
 
 ?>
 
@@ -102,35 +99,8 @@ if(!empty($_POST)){
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="basicCss.css">
-    <!-- JAVASCRIPT VALIDATION SECTION
+    <!-- JAVASCRIPT VALIDATION SECTION -->
     <script src="basicJs.js"></script>
-    -->
-
-
-    <?php
-        $validForm = true;
-        for($i = 0; $i < count($checks); $i++){
-            if($checks[$i] == 0) {
-                $validForm = false;
-
-                echo "  <style type=\"text/css\">
-                    #error" . $fields[$i] .
-                    " {
-                        display: inline;
-                    }
-                    </style>";
-
-            }else{
-                echo "  <style type=\"text/css\">
-                    #error" . $fields[$i] .
-                     "{
-                        display: none;
-                    }
-                    </style>";
-            }
-        }
-
-    ?>
 </head>
 
 <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post" id="mainForm" enctype="multipart/form-data"
@@ -146,7 +116,7 @@ if(!empty($_POST)){
         </div>
         <p>
             <label for="email">Email</label>
-            <input tpye="text" id="email" name="email" required>
+            <input type="text" id="email" name="email" required>
             <span class="error" id="errorEmail">Format: ***@***.com</span>
         </p>
         <p>
