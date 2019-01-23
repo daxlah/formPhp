@@ -4,10 +4,9 @@
  *
  */
 
+require_once("PDOconnect.php");
+
 $validForm = true;
-
-
-
 
 //check name
 if(!empty($_POST['name']) || preg_match("/[A-Z]{1}[a-z']$/i", $_POST['name'])){
@@ -92,6 +91,7 @@ if($validForm){
     echo "Please fix the errors listed.";
 }
 
+$conn = null;
 
 ?>
 
