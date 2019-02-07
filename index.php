@@ -230,9 +230,12 @@
                         <td><?php echo $row['message'] ?></td>
                         <td>
                             <button onclick="displayImage(<?php echo $row['id'] ?>)">Image</button>
-                                <img src="<?php echo $row['imageDirectory'] ?>" id="<?php echo "diplayImage" . $row['id'] ?>">
+                                <a href="<?php echo $row['imageDirectory'] ?>" download>
+                                    <img src="<?php echo $row['imageDirectory'] ?>"
+                                         id="<?php echo "diplayImage" . $row['id'] ?>" class="image">
+                                </a>
                             <button onclick="displayDirectory(<?php echo $row['id'] ?>)">Directory</button>
-                                <p id="<?php echo "displayDirectory" . $row['id'] ?>"><?php echo $row['imageDirectory'] ?></p>
+                                <p id="<?php echo "displayDirectory" . $row['id'] ?>" class="image"><?php echo $row['imageDirectory'] ?></p>
                         </td>
                     </tr>
                 <?php endwhile; ?>

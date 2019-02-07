@@ -96,9 +96,11 @@ function checkFile(){
  * displayImage()
  * Hides or shows image.
  */
-function displayImage(var rowId) {
+function displayImage(rowId) {
     var id = "diplayImage" + rowId;
     var image = document.getElementById(id);
+
+    console.log(id);
 
     if (image.style.display === "none") {
         image.style.display = "block";
@@ -111,7 +113,7 @@ function displayImage(var rowId) {
  * displayDirectory()
  * Hides or show directory of an image.
  */
-function displayDirectory(var rowId) {
+function displayDirectory(rowId) {
     var id = "displayDirectory" + rowId;
     var image = document.getElementById(id);
 

@@ -38,6 +38,10 @@ form {
     margine-bottom:20px;
 }
 
+.image {
+    display: none;
+}
+
 #mainForm {
     margin-top:20px;
     margin-left:20px;
@@ -51,6 +55,3 @@ form {
     clear: both;
 }
 
-#diplayImage, #displayDirectory {
-    display: none;
-}
