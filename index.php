@@ -58,7 +58,7 @@
                 /**
                  *  $imageDirectory for database var here
                  */
-                $imageDirectory = $target_dir;
+                $imageDirectory = $target_dir . DIRECTORY_SEPARATOR . $fileName . "." . $fileType;
 
 
                 echo "Upload success.<br>";
@@ -136,9 +136,10 @@
         <link rel="stylesheet" type="text/css" href="basicCss.css">
         <!-- JAVASCRIPT VALIDATION SECTION -->
         <script src="basicJs.js"></script>
-        <title>Weeee</title>
+        <title>Basic web page</title>
     </head>
     <body>
+        <h1>Form</h1>
         <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post" id="mainForm" enctype="multipart/form-data"
               onsubmit="return validateForm(this)">
             <div class = "fields">
@@ -171,22 +172,74 @@
             <input type="submit" value="Submit" id="submit">
         </form>
 
+        <h1>Table</h1>
+
         <?php
 
         /**
          * todo: retrieve data from database
          */
 
+        class TableRows extends RecursiveIteratorIterator {
+            function __construct($it) {
+                parent::__construct($it, self::LEAVES_ONLY);
+            }
+
+            function current() {
+                return "<td style='width:150px;border:1px solid black;'>" . parent::current(). "</td>";
+            }
+
+            function beginChildren() {
+                echo "<tr>";
+            }
+
+            function endChildren() {
+                echo "</tr>" . "\n";
+            }
+        }
+
         $sql = "SELECT * ";
         $sql .= "FROM table1 ";
 
-        $result = $conn->query($sql);
-
-
-
+        $stmt = $conn->prepare($sql);
 
         $conn = null;
-        ?>
+
+        if ($stmt->execute()) : ?>
+            <table>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Message</th>
+                    <th>Image Directory</th>
+                </tr>
+                <?php
+                    $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+                    /*
+                     * this  prints out every singular entry
+                    foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) {
+                        echo $v;
+                    }
+                    */
+                while ($row = $stmt->fetch()) : ?>
+                    <tr>
+                        <td><?php echo $row['id'] ?></td>
+                        <td><?php echo $row['name'] ?></td>
+                        <td><?php echo $row['email'] ?></td>
+                        <td><?php echo $row['message'] ?></td>
+                        <td>
+                            <button onclick="displayImage(<?php echo $row['id'] ?>)">Image</button>
+                                <img src="<?php echo $row['imageDirectory'] ?>" id="<?php echo "diplayImage" . $row['id'] ?>">
+                            <button onclick="displayDirectory(<?php echo $row['id'] ?>)">Directory</button>
+                                <p id="<?php echo "displayDirectory" . $row['id'] ?>"><?php echo $row['imageDirectory'] ?></p>
+                        </td>
+                    </tr>
+                <?php endwhile; ?>
+            </table>
+        <?php else : ?>
+            <p>Unable to retrieve data.</p>
+        <?php endif; ?>
 
     </body>
 </html>

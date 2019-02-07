@@ -91,3 +91,33 @@ function checkFile(){
 
 
 }
+
+/**
+ * displayImage()
+ * Hides or shows image.
+ */
+function displayImage(var rowId) {
+    var id = "diplayImage" + rowId;
+    var image = document.getElementById(id);
+
+    if (image.style.display === "none") {
+        image.style.display = "block";
+    } else {
+        image.style.display = "none";
+    }
+}
+
+/**
+ * displayDirectory()
+ * Hides or show directory of an image.
+ */
+function displayDirectory(var rowId) {
+    var id = "displayDirectory" + rowId;
+    var image = document.getElementById(id);
+
+    if (image.style.display === "none") {
+        image.style.display = "block";
+    } else {
+        image.style.display = "none";
+    }
+}

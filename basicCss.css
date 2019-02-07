@@ -8,24 +8,15 @@ textarea {
     width: 25%;
 }
 
-label{
+label {
     display: inline-block;
     float: left;
     clear: left;
     width: 150px;
 }
 
-#mainForm{
-    margin-top:20px;
-    margin-left:20px;
-    width: 50%;
-
-}
-
-#submit{
-    margin-top: 50px;
-    float: left;
-    clear: both;
+form {
+    padding-bottom: 150px;
 }
 
 .fields input,.fields textarea {
@@ -35,7 +26,7 @@ label{
     margin: 10px;
 }
 
-.error{
+.error {
     display: none;
     border-radius: 5px;
     padding: 10px;
@@ -45,4 +36,21 @@ label{
     width: 95%;
     margin-top:5px;
     margine-bottom:20px;
+}
+
+#mainForm {
+    margin-top:20px;
+    margin-left:20px;
+    width: 50%;
+
+}
+
+#submit {
+    margin-top: 50px;
+    float: left;
+    clear: both;
+}
+
+#diplayImage, #displayDirectory {
+    display: none;
 }
