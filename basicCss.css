@@ -16,7 +16,7 @@ label {
 }
 
 form {
-    padding-bottom: 150px;
+
 }
 
 .fields input,.fields textarea {
@@ -46,6 +46,7 @@ form {
     margin-top:20px;
     margin-left:20px;
     width: 50%;
+    padding-bottom: 150px;
 
 }
 

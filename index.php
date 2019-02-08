@@ -134,7 +134,6 @@
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="basicCss.css">
-        <!-- JAVASCRIPT VALIDATION SECTION -->
         <script src="basicJs.js"></script>
         <title>Basic web page</title>
     </head>
@@ -213,6 +212,7 @@
                     <th>Email</th>
                     <th>Message</th>
                     <th>Image Directory</th>
+                    <th>Extra</th>
                 </tr>
                 <?php
                     $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
@@ -235,7 +235,20 @@
                                          id="<?php echo "diplayImage" . $row['id'] ?>" class="image">
                                 </a>
                             <button onclick="displayDirectory(<?php echo $row['id'] ?>)">Directory</button>
-                                <p id="<?php echo "displayDirectory" . $row['id'] ?>" class="image"><?php echo $row['imageDirectory'] ?></p>
+                                <p id="<?php echo "displayDirectory" . $row['id'] ?>"
+                                   class="image"><?php echo $row['imageDirectory'] ?>
+                                </p>
+                        </td>
+                        <td>
+                            <!-- FORM EDIT + DELETE -->
+                            <form action="editPage.php" method="POST">
+                                <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
+                                <input type="submit" value="Edit">
+                            </form>
+                            <form action="delete.php" method="POST">
+                                <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
+                                <input type="submit" value="Delete">
+                            </form>
                         </td>
                     </tr>
                 <?php endwhile; ?>
