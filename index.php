@@ -163,7 +163,7 @@
                 <br>
                 <span>
                     <label for="browsePhoto">Photo</label>
-                    <input type="file" id="browsePhoto" name="browsePhoto" required>
+                    <input type="file" id="browsePhoto" name="browsePhoto" >
                     <span class="error" id="errorImage">Please select an image</span>
                 </span>
             </div>
@@ -215,8 +215,9 @@
                     <th>Extra</th>
                 </tr>
                 <?php
-                    $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
                     /*
+                    $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+
                      * this  prints out every singular entry
                     foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) {
                         echo $v;

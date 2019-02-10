@@ -7,7 +7,7 @@
  */
 function validateForm(form) {
 
-	var valid = checkName();
+    let valid = checkName();
 
 	if(!checkEmail())
 	    valid = false;
@@ -26,12 +26,12 @@ function validateForm(form) {
  * @returns {boolean}
  */
 function checkName(){
-    var name = document.getElementById("name").value;
-    var nameValid = true;
+    let name = document.getElementById("name").value;
+    let nameValid = true;
     console.log(name);
 
     //if(/[A-Z]{1}[a-z']/.test(name[0])){
-    if(name.match(/[A-Z]{1}[a-z']$/i)) {
+    if(name.match(/^[a-z']+$/i)) {
         document.getElementById("errorName").style.display = "none";
         console.log("valid name");
     }else{
@@ -52,9 +52,9 @@ function checkName(){
  * @returns {boolean}
  */
 function checkEmail(){
-	var email = document.getElementById("email").value;
+	let email = document.getElementById("email").value;
 	console.log(email);
-	var validate = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.com$/
+	let validate = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.com$/
 
 	if(validate.test(String(email))){
 		document.getElementById("errorEmail").style.display = "none";
@@ -74,19 +74,23 @@ function checkEmail(){
  * @returns {boolean}
  */
 function checkFile(){
-	var file = document.getElementById("browsePhoto").value;
 
-    var extension = file.split('.').pop();
+	if(document.getElementById("browsePhoto").value) {
+        let file = document.getElementById("browsePhoto").value;
+        let extension = file.split('.').pop();
 
 
-	if(extension.match(/(jpg|jpeg|png|gif)$/i)) {
-        document.getElementById("errorImage").style.display = "none";
-        console.log("Is an image");
-        return true;
+        if (extension.match(/(jpg|jpeg|png|gif)$/i)) {
+            document.getElementById("errorImage").style.display = "none";
+            console.log("Is an image");
+            return true;
+        } else {
+            document.getElementById("errorImage").style.display = "inline";
+            console.log("Is an not an image");
+            return false;
+        }
     }else{
-        document.getElementById("errorImage").style.display = "inline";
-        console.log("Is an not an image");
-        return false;
+	    return true;
     }
 
 
@@ -97,8 +101,8 @@ function checkFile(){
  * Hides or shows image.
  */
 function displayImage(rowId) {
-    var id = "diplayImage" + rowId;
-    var image = document.getElementById(id);
+    let id = "diplayImage" + rowId;
+    let image = document.getElementById(id);
 
     console.log(id);
 
@@ -114,8 +118,8 @@ function displayImage(rowId) {
  * Hides or show directory of an image.
  */
 function displayDirectory(rowId) {
-    var id = "displayDirectory" + rowId;
-    var image = document.getElementById(id);
+    let id = "displayDirectory" + rowId;
+    let image = document.getElementById(id);
 
     if (image.style.display === "none") {
         image.style.display = "block";
