@@ -12,7 +12,6 @@
     if(!empty($_POST['name']) || preg_match("/[A-Z]{1}[a-z']$/i", $_POST['name'])){
         $name = $_POST["name"];
     }else{
-        echo "Invalid name<br>";
         $validForm = false;
     }
 
@@ -20,7 +19,6 @@
     if(!empty($_POST['email']) || preg_match("/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.com$/", $_POST["email"])){
         $email = $_POST["email"];
     }else{
-        echo "Invalid email<br>";
         $validForm = false;
     }
 
@@ -28,7 +26,6 @@
     if(!empty($_POST['message'])){
         $message = $_POST["message"];
     }else{
-        echo "No value entered in message<br>";
         $validForm = false;
     }
 
@@ -61,7 +58,6 @@
                 $imageDirectory = $target_dir . DIRECTORY_SEPARATOR . $fileName . "." . $fileType;
 
 
-                echo "Upload success.<br>";
             }else{
                 echo "Something went wrong when uploading the file.<br>";
                 $validForm = false;
@@ -73,8 +69,12 @@
         }
 
     }else{
-        echo "File not found.<br>";
-        $validForm = false;
+        /*
+         * PHP VALIDATION
+         *
+                echo "File not found.<br>";
+                $validForm = false;
+        */
     }
 
     if($validForm){
@@ -122,11 +122,11 @@
         }
 
 
-    }else{
-        echo "Please fix the errors listed.";
     }
 
 $conn = null;
+
+    require_once ("nav.php");
 
 ?>
 

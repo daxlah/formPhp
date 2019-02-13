@@ -6,6 +6,49 @@ $name = $_POST['name'];
 $email = $_POST["email"];
 $message = $_POST["message"];
 
+
+
+//check photo
+if(!empty($_FILES) && file_exists($_FILES['browsePhoto']['tmp_name'])) {
+    $filename = $_FILES['browsePhoto']['name'];
+    //get file type
+    $fileType = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+    //validate image
+    if(preg_match("/(jpg|jpeg|png|gif)$/i", $fileType)){
+        //folder names
+        $fileName = $name . "-" . date("Y\-m\-d\-G\-i\-s");
+        $uploads_folder = "uploads";
+
+        //create folder if doesnt exist
+        mkdir ($uploads_folder . DIRECTORY_SEPARATOR . $fileName, 0755);
+
+        //upload file
+        $target_dir = $uploads_folder . DIRECTORY_SEPARATOR . $fileName;
+        $target_file = $target_dir . basename($_FILES["browsePhoto"]["name"]);
+
+        echo $target_dir . "<br>";
+        echo $target_file . "<br>";
+
+        if(move_uploaded_file($_FILES['browsePhoto']['tmp_name'],
+            $target_dir.DIRECTORY_SEPARATOR . $fileName . "." . $fileType)) {
+            /**
+             *  $imageDirectory for database var here
+             */
+            $imageDirectory = $target_dir . DIRECTORY_SEPARATOR . $fileName . "." . $fileType;
+            echo $imageDirectory . "<br>";
+
+
+        }else{
+            echo "Something went wrong when uploading the file.<br>";
+        }
+
+    }else{
+        echo "File uploaded is not an image.<br>";
+    }
+}else{
+    $imageDirectory = "";
+}
+
 /**
  * Update database
  */
@@ -25,5 +68,6 @@ $statement->execute();
 
 $conn = null;
 
-header("location: index.php")
+echo "Please wait while the row is edited";
+header('Location: table.php');
 ?>

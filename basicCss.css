@@ -1,8 +1,12 @@
 
 *{
     padding: 5px;
+
 }
 
+body {
+    background-color: #fffafa;
+}
 
 textarea {
     resize: vertical;
@@ -18,6 +22,11 @@ label {
 
 form {
 
+}
+
+a {
+    color: #fffafa;
+    text-decoration: none;
 }
 
 .fields input,.fields textarea {
@@ -41,6 +50,25 @@ form {
 
 .image {
     display: none;
+}
+
+.nav {
+    float: top;
+    display: inline-block;
+    text-decoration: none;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    width: 100%;
+    background-color: lightslategray;
+    text-decoration: #fffafa;
+}
+
+.nav li {
+    float: left;
+    text-align: center;
+    background-color: lightslategray;
 }
 
 #mainForm {

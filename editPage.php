@@ -1,6 +1,8 @@
 <?php
 
 $id = $_POST['id'];
+
+require_once ("nav.php");
 ?>
 
 <!DOCTYPE html>

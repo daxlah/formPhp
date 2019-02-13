@@ -5,7 +5,7 @@
      */
 
     require_once("PDOconnect.php");
-
+require_once ("nav.php");
 
 //todo: https://datatables.net/manual/installation
 

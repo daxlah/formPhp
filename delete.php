@@ -8,5 +8,7 @@ $result = $conn->query($sql);
 
 $conn = null;
 
+echo "Please wait while the data gets deleted";
+
 header('Location: index.php');
 ?>
