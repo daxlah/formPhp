@@ -26,18 +26,14 @@ if(!empty($_FILES) && file_exists($_FILES['browsePhoto']['tmp_name'])) {
         $target_dir = $uploads_folder . DIRECTORY_SEPARATOR . $fileName;
         $target_file = $target_dir . basename($_FILES["browsePhoto"]["name"]);
 
-        echo $target_dir . "<br>";
-        echo $target_file . "<br>";
-
         if(move_uploaded_file($_FILES['browsePhoto']['tmp_name'],
             $target_dir.DIRECTORY_SEPARATOR . $fileName . "." . $fileType)) {
             /**
              *  $imageDirectory for database var here
              */
             $imageDirectory = $target_dir . DIRECTORY_SEPARATOR . $fileName . "." . $fileType;
-            echo $imageDirectory . "<br>";
 
-
+            echo "Please wait while the row is edited";
         }else{
             echo "Something went wrong when uploading the file.<br>";
         }
@@ -68,6 +64,5 @@ $statement->execute();
 
 $conn = null;
 
-echo "Please wait while the row is edited";
 header('Location: table.php');
 ?>

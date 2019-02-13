@@ -29,6 +29,10 @@ a {
     text-decoration: none;
 }
 
+td {
+    background-color: #FAEBEB;
+}
+
 .fields input,.fields textarea {
     display: inline-block;
     float: left;

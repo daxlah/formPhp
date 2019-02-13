@@ -1,4 +1,3 @@
-
 /**
  * validateForm(form)
  * Main function called by form.
@@ -44,6 +43,7 @@ function checkName(){
     return nameValid;
 
 }
+
 
 
 /**
