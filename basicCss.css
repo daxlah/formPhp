@@ -56,7 +56,7 @@ td {
     display: none;
 }
 
-.nav {
+.navItems {
     float: top;
     display: inline-block;
     text-decoration: none;
@@ -69,7 +69,7 @@ td {
     text-decoration: #fffafa;
 }
 
-.nav li {
+.navItems li {
     float: left;
     text-align: center;
     background-color: lightslategray;
@@ -80,8 +80,15 @@ td {
     margin-left:20px;
     width: 50%;
     padding-bottom: 150px;
-
 }
+
+#menuButton {
+     width: 35px;
+     height: 5px;
+     background-color: black;
+     margin: 6px 0;
+     display: none;
+ }
 
 #submit {
     margin-top: 50px;
@@ -89,3 +96,22 @@ td {
     clear: both;
 }
 
+@media only screen and (max-width: 600px) {
+    * {
+        font-size: 1.2em;
+    }
+
+    .menuButton {
+        display: inline-block;
+
+    }
+
+    .navItems {
+        display: none;
+        font-size: 4em;
+    }
+
+    #submit {
+        background-color: #feeaee;
+    }
+}

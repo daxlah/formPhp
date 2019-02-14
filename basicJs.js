@@ -105,10 +105,8 @@ function displayImage(rowId) {
     let id = "diplayImage" + rowId;
     let image = document.getElementById(id);
 
-    console.log(id);
-
     if (image.style.display === "none") {
-        image.style.display = "block";
+        image.style.display = "inline-block";
     } else {
         image.style.display = "none";
     }
@@ -123,8 +121,26 @@ function displayDirectory(rowId) {
     let image = document.getElementById(id);
 
     if (image.style.display === "none") {
-        image.style.display = "block";
+        image.style.display = "inline-block";
     } else {
         image.style.display = "none";
     }
+}
+
+/**
+ * displayMenu()
+ * Hides or shows the menu for mobile users
+ */
+function displayMenu() {
+    let id = document.getElementById("menuButton");
+
+
+    // todo: show a vertical block of items
+    let nav = document.getElementsByClassName("navItems");
+    if(nav.style.display === "none") {
+        nav.style.display = "block";
+    }else{
+        nav.style.display = "none";
+    }
+
 }
