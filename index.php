@@ -143,7 +143,6 @@ $conn = null;
               onsubmit="return validateForm(this)">
             <div class = "fields">
                 <div>
-
                     <label for="name">Name</label>
                     <input type="text" id="name" name="name" required>
                     <span class="error" id="errorName">Format: Xxxxx</span>
@@ -170,7 +169,6 @@ $conn = null;
             <br>
             <input type="submit" value="Submit" id="submit">
         </form>
-
     </body>
 </html>
 
