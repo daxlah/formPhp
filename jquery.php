@@ -20,12 +20,13 @@
             $("form").on('submit',function(e){
                 e.preventDefault();
 
-            ...
-            ...
-            ..
+                let valid = true;
 
-                if(validated == true)
-                $(this).submit();
+                //validation
+
+
+                if(valid)
+                    $(this).submit();
             });
 
             // //prepare the form when the DOM is ready
