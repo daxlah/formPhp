@@ -1,6 +1,4 @@
 <?php
-
-
 ?>
 
 <!DOCTYPE html>
@@ -16,97 +14,112 @@
 
         <script type="text/javascript">
 
-            //every time a form is submitted
-            $("form").on('submit',function(e){
-                e.preventDefault();
+            $(document).ready(function(){
 
-                let valid = true;
-
-                //validation
+                $(document).on("submit", "form", function(e){
 
 
-                if(valid)
-                    $(this).submit();
+                    let valid = true;
+
+                    let name = $("#name").val();
+                    let email = $("#email").val();
+                    let message = $("#message").val();
+                    let imageName = $("#browsePhoto").val();
+
+                    if(!$.fn.validateName(name))
+                        valid = false;
+
+                    if(!$.fn.validateEmail(email))
+                        valid = false;
+
+                    if(!$.fn.validateMessage(message))
+                        valid = false;
+
+                    if(!$.fn.validateFile(imageName))
+                        valid = false;
+
+                    if(!valid)
+                        e.preventDefault();
+
+                });
+
+
+                //functions
+
+                /**
+                 * validateName()
+                 *
+                 * @param name
+                 * @returns {boolean}
+                 */
+                $.fn.validateName = function(name){
+                    let regex = /^[a-z']+$/i;
+                    let valid = true;
+
+                    if (!regex.test(name)) {
+                        valid = false;
+                        console.log("Invalid name");
+                    }
+
+                    return valid;
+                };
+
+                /**
+                 * validateEmail()
+                 *
+                 * @param email
+                 * @returns {boolean}
+                 */
+                $.fn.validateEmail = function(email){
+                    let regex = /^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.com$/;
+                    let valid = true;
+
+                    if (!regex.test(email)) {
+                        valid = false;
+                        console.log("Invalid email");
+                    }
+
+                    return valid;
+                };
+
+                /**
+                 * validateMessage()
+                 *
+                 * @param message
+                 * @returns {boolean}
+                 */
+                $.fn.validateMessage = function(message){
+                    let valid = true;
+
+                    if(message === ""){
+                        valid = false;
+                        console.log("Invalid message");
+                    }
+
+                    return valid;
+                };
+
+                /**
+                 * validateFile()
+                 *
+                 * @param fileName
+                 * @returns {boolean}
+                 */
+                $.fn.validateFile = function(fileName){
+                    let valid = true;
+                    let extension = fileName.split(".").pop();
+
+                    if(fileName === ""){
+                        console.log("No file found");
+                    }else if (!extension.match(/(jpg|jpeg|png|gif)$/i)) {
+                        valid = false;
+                        console.log("Invalid file type");
+                    }
+
+                    return valid;
+                }
+
             });
-
-            // //prepare the form when the DOM is ready
-            // $(document).ready(function() {
-            //     // bind form using ajaxForm
-            //     $('#mainForm').ajaxForm( { beforeSubmit: validate } );
-
-                //get values from form
-                // let valid = true;
-                //
-                // let name = $('#name').val();
-                // let email = $("#email").val();
-                // let message = $("#message").val();
-                // //let file = $("#browsePhoto")[0].files[0];
-                // let file = $("#browsePhoto").files.name;
-
-
-                // $(document).on('click', 'form button[type=submit]', function(e) {
-                //
-                //
-                //     if(!isValid) {
-                //         e.preventDefault(); //prevent the default action
-                //     }
-                // }
-
-
-
-                // //when "submit" is used
-                // $("#submit").click(function () {
-                //     console.log("Submit button :D");
-                //
-                //     //name validation
-                //     let regex = new RegExp("^[a-z']+$/i");
-                //     if (!regex.test(name)) {
-                //         valid = false;
-                //     }
-                //
-                //     //email validation
-                //     regex = new RegExp("^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.com$");
-                //     if (!regex.test(email)) {
-                //         valid = false;
-                //     }
-                //
-                //     //message validation
-                //     if (message == "") {
-                //         valid = false;
-                //     }
-                //
-                //     //file validation
-                //
-                //
-                //     //stops submitting
-                //     if (!valid) {
-                //         $("mainForm").submit(function (e) {
-                //             e.preventDefault();
-                //         });
-                //     }
-                //
-                // });
-
-                // $(document).ready(function() {
-                //     $("#mainForm").validate({
-                //        rules: {
-                //             name: {
-                //                  required: true
-                //              }
-                //        },
-                //         submitHandler: function(form) {
-                //            alert('valid form submitted'); // for demo
-                //            return false; // for demo
-                //         }
-                //     });
-                // });
-            // });
-            //
-            // function validate(formData, jqForm, options) {
-            //     let valid = true;
-            //
-            //     return valid;
-            // }
 
         </script>
     </head>
