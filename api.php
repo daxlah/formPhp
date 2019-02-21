@@ -5,30 +5,29 @@
 
 <!DOCTYPE html>
 
-<!--
-public APIs
-https://github.com/toddmotto/public-apis
-
-https://developers.google.com/youtube/v3/sample_requests
-
-https://schoolofdata.org/2013/11/18/web-apis-for-non-programmers/
--->
-
 <html>
     <head>
-        <!--
-        <script>
-            fetch('https://jsonplaceholder.typicode.com/todos/1')
-                .then(response => response.json())
-                .then(json => console.log(json))
-        </script>
-        source: https://jsonplaceholder.typicode.com/
-        -->
+        <script
+            src="https://code.jquery.com/jquery-3.3.1.js"
+            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+            crossorigin="anonymous"></script>
         <script src="basicJs.js"></script>
 
-        <title>API test</title>
+        <link rel="stylesheet" type="text/css" href="basicCss.css">
+        <title>API</title>
+
+        <script>
+            let url = 'https://reqres.in/api/users?page=';
+
+
+
+            //todo: display users in a table :P
+
+
+
+        </script>
     </head>
     <body>
-    <button onclick="apiTest()">Get Shibe</button>
+<!--    <button onclick="apiTest()">Get Shibe</button>-->
     </body>
 </html>

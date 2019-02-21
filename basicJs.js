@@ -8,30 +8,51 @@
  *
  * returns object
  */
-function apiTest() {
+function apiGet() {
+    fetch(url)
+        .then(res => res.json())
+        .then((out) => {
+            console.log('Checkout this JSON! ', out);
 
-    let request = new XMLHttpRequest();
+            return out;
 
-    request.open('GET',
-        'https://ghibliapi.herokuapp.com/films', true);
+        })
+        .catch(err => { throw err });
 
-
-    request.onload = function() {
-        console.log('inside onload');
-        //Accessing JSON data
-        let data = JSON.parse(this.response);
-        console.log(data);
-    }
-    //
-    request.send();
-    //
-    // let data = JSON.parse(this.response);
-    //
-    // data.forEach(shibe => {
-    //     // Log each movie's title
-    //     console.log(shibe);
-    // });
 }
+
+/**
+ * create table of all user (for API)
+ * // turn this thing into a function and have url as the parameter
+ // get first page. Get "total_pages"
+ // change url and count pages accordingly to get all users
+ */
+function tableCreate(){
+    let body = document.body,
+        tbl  = document.createElement('table');
+    tbl.style.width  = '100px';
+    tbl.style.border = '1px solid black';
+
+    for(let i = 0; i < 3; i++){
+        let tr = tbl.insertRow();
+        for(let j = 0; j < 2; j++){
+            if(i === 2 && j === 1){
+                break;
+            } else {
+                var td = tr.insertCell();
+                td.appendChild(document.createTextNode('Cell'));
+                td.style.border = '1px solid black';
+                if(i === 1 && j === 1){
+                    td.setAttribute('rowSpan', '2');
+                }
+            }
+        }
+    }
+    body.appendChild(tbl);
+
+    tableCreate();
+}
+//tableCreate();
 
 /**
  * jsonTest()
