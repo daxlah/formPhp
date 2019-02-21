@@ -8,7 +8,7 @@
  *
  * returns object
  */
-function apiGet() {
+function apiGet(url) {
     fetch(url)
         .then(res => res.json())
         .then((out) => {
@@ -27,16 +27,17 @@ function apiGet() {
  // get first page. Get "total_pages"
  // change url and count pages accordingly to get all users
  */
-function tableCreate(){
+function tableCreate(rowNum, colNum, userData){
+    // todo: have the userData be a 2d array
     let body = document.body,
         tbl  = document.createElement('table');
     tbl.style.width  = '100px';
     tbl.style.border = '1px solid black';
 
-    for(let i = 0; i < 3; i++){
+    for(let i = 0; i < rowNum; i++){
         let tr = tbl.insertRow();
-        for(let j = 0; j < 2; j++){
-            if(i === 2 && j === 1){
+        for(let j = 0; j < colNum; j++){
+            if(i === rowNum-1 && j === colNum-1){
                 break;
             } else {
                 var td = tr.insertCell();

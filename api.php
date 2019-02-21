@@ -19,6 +19,17 @@
         <script>
             let url = 'https://reqres.in/api/users?page=';
 
+            let result = apiGet(url);
+            console.log(data);
+            let users = [];
+
+            //better loop idea: https://stackoverflow.com/questions/13802987/to-count-the-number-of-objects-in-object-literal-using-jquery
+            for(let i = 0; i < result.length; i++){
+                users[i] = result[i];
+                console.log(users[i]);
+            }
+
+            // OR
 
 
             //todo: display users in a table :P
