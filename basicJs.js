@@ -9,15 +9,34 @@
  * returns object
  */
 function apiGet(url) {
-    fetch(url)
-        .then(res => res.json())
-        .then((out) => {
-            console.log('Checkout this JSON! ', out);
+    var users;
 
-            return out;
+    // fetch(url)
+    //     .then(res => res.json())
+    //     .then((out) => {
+    //         //console.log('Checkout this JSON! ', out);
+    //
+    //         //console.log(out);
+    //
+    //         out.forEach(out => console.log(JSON.stringify(out.data)));
+    //
+    //         return out;
+    //         // return JSON.stringify(out);
+    //
+    //     })
+    //     .catch(err => { throw err });
 
-        })
-        .catch(err => { throw err });
+    $.getJSON(url, function(data) {
+        users = data;
+
+        console.log("Within apiGet function: ", data);
+        console.log("first name: ", users.data.first_name);
+
+        return users;
+
+    });
+
+
 
 }
 
