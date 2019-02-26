@@ -1,12 +1,8 @@
-
 /**
- * apiTest()
+ * apiGet(url)
+ * Grabs json and returns all objects in an array
  *
- * source: https://api.nasa.gov/#getting-started
- * includes other code in Live Example
- * Testing how to use APIs
- *
- * returns object
+ * @param url
  */
 function apiGet(url) {
     let user;
@@ -30,7 +26,6 @@ function apiGet(url) {
             // loads a single object into user
             user = data[Object.keys(data)[i]];
 
-            //TEST
             //load data into users array
             id = user.id;
             firstName = user.first_name;
@@ -38,7 +33,6 @@ function apiGet(url) {
             avatar = user.avatar;
 
             userData[i] = [id, lastName, firstName, avatar];
-            //END TEST
         }
 
         //print items in userData
@@ -46,10 +40,10 @@ function apiGet(url) {
             console.log(userData[i]);
         }
 
-        return userData;
+
 
     });
-
+    return userData;
 
 
 }
