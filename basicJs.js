@@ -40,8 +40,6 @@ function apiGet(url) {
             console.log(userData[i]);
         }
 
-
-
     });
     return userData;
 
@@ -74,7 +72,7 @@ function tableCreate(rowNum, colNum, userData){
     let body = document.body,
         tbl  = document.createElement('table');
     tbl.style.width  = '100px';
-    tbl.style.border = '1px solid black';
+    // tbl.style.border = '1px solid black';
 
     for(let i = 0; i < rowNum; i++){
         let tr = tbl.insertRow();

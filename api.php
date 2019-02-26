@@ -7,6 +7,7 @@
 
 <html>
     <head>
+
         <script
             src="https://code.jquery.com/jquery-3.3.1.js"
             integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
@@ -25,16 +26,8 @@
 
 
 
-
-            // let size = JSON.parse(result);
-            //
-            // console.log(size);
-            //
-            // let users = [];
-
-
-
-
+            //todo: function to count row of array
+            //todo: function to count col of array
             //todo: display users in a table :P
 
 
