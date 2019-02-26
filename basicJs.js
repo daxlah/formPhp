@@ -9,35 +9,64 @@
  * returns object
  */
 function apiGet(url) {
-    var users;
+    let user;
+    let userData = new Array();
 
-    // fetch(url)
-    //     .then(res => res.json())
-    //     .then((out) => {
-    //         //console.log('Checkout this JSON! ', out);
-    //
-    //         //console.log(out);
-    //
-    //         out.forEach(out => console.log(JSON.stringify(out.data)));
-    //
-    //         return out;
-    //         // return JSON.stringify(out);
-    //
-    //     })
-    //     .catch(err => { throw err });
+    let id, firstName, lastName, avatar;
 
+
+    //let json = $.getJSON(url, function(data) {
     $.getJSON(url, function(data) {
-        users = data;
+
+
+        //check returned item
+        console.log("'data' is " + getType(data));
 
         console.log("Within apiGet function: ", data);
-        console.log("first name: ", users.data.first_name);
 
-        return users;
+        let size = Object.keys(data).length;
+
+        for(let i = 0; i < size; i++){
+            // loads a single object into user
+            user = data[Object.keys(data)[i]];
+
+            //TEST
+            //load data into users array
+            id = user.id;
+            firstName = user.first_name;
+            lastName = user.last_name;
+            avatar = user.avatar;
+
+            userData[i] = [id, lastName, firstName, avatar];
+            //END TEST
+        }
+
+        //print items in userData
+        for(let i = 0; i < size; i++){
+            console.log(userData[i]);
+        }
+
+        return userData;
 
     });
 
 
 
+}
+
+/**
+ * getType(p)
+ *
+ * Displays type of variable
+ *
+ * @param p
+ * @returns {string}
+ */
+function getType(p) {
+    if (Array.isArray(p)) return 'array';
+    else if (typeof p == 'string') return 'string';
+    else if (p != null && typeof p == 'object') return 'object';
+    else return 'other';
 }
 
 /**
