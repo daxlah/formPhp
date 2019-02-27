@@ -14,11 +14,14 @@ function apiGet(url) {
     //let json = $.getJSON(url, function(data) {
     $.getJSON(url, function(data) {
 
-        let size = Object.keys(data).length;
+        let size = Object.keys(data.data).length;
 
+
+        data = data.data;
         for(let i = 0; i < size; i++){
             // loads a single object into user
             user = data[Object.keys(data)[i]];
+
 
             //load data into users array
             id = user.id;
@@ -29,18 +32,21 @@ function apiGet(url) {
             userData[i] = [id, lastName, firstName, avatar];
         }
 
+        console.log("API GET");
         //print items in userData
         for(let i = 0; i < size; i++){
             console.log(userData[i]);
         }
 
     });
-    return userData;
+    // return userData;
 
 
 }
 
 /**
+ * Checks if array
+ *
  * outputs on console
  * @param arr
  */
@@ -57,8 +63,6 @@ function checkArray(arr){
 }
 
 /**
- * getType(p)
- *
  * Displays type of variable
  *
  * @param p
@@ -104,7 +108,38 @@ function tableCreate(userData) {
 
         console.log("row: " + row, "col: " + col);
 
-    }, 200);
+        // todo: separate into getRow/getCol and create table
+
+
+        // TABLE CREATION
+        let body = document.body,
+            tbl  = document.createElement('table');
+
+        tbl.style.width  = '100px';
+
+        //creating actual table
+        for(let i = 0; i < row; i++){
+            let tr = tbl.insertRow();
+            for(let j = 0; j < col; j++){
+                if(i === row-1 && j === col-1){
+                    break;
+                } else {
+                    var td = tr.insertCell();
+                    // td.appendChild(document.createTextNode('Cell'));
+                    // td.style.border = '1px solid black';
+                    td.appendChild(document.createTextNode(userData[i][j]));
+                    if(i === 1 && j === 1){
+                        td.setAttribute('rowSpan', '2');
+                    }
+                }
+            }
+        }
+        body.appendChild(tbl);
+
+        tableCreate();
+
+
+    }, 500);
 }
 
 

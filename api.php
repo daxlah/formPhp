@@ -18,13 +18,13 @@
         <title>API</title>
 
         <script>
-            let url = 'https://reqres.in/api/users/2';
+            let url = 'https://reqres.in/api/users?page=2';
 
             let result = apiGet(url);
 
-            console.log("Result: ", result);
-
-            tableCreate(result);
+            // console.log("Result: ", result);
+            //
+            // tableCreate(result);
 
             //todo: display users in a table :P
 
