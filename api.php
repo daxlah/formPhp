@@ -22,12 +22,10 @@
 
             let result = apiGet(url);
 
-            console.log("Within script: ", result);
+            console.log("Result: ", result);
 
+            tableCreate(result);
 
-
-            //todo: function to count row of array
-            //todo: function to count col of array
             //todo: display users in a table :P
 
 

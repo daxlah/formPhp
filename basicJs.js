@@ -14,12 +14,6 @@ function apiGet(url) {
     //let json = $.getJSON(url, function(data) {
     $.getJSON(url, function(data) {
 
-
-        //check returned item
-        console.log("'data' is " + getType(data));
-
-        console.log("Within apiGet function: ", data);
-
         let size = Object.keys(data).length;
 
         for(let i = 0; i < size; i++){
@@ -47,6 +41,22 @@ function apiGet(url) {
 }
 
 /**
+ * outputs on console
+ * @param arr
+ */
+function checkArray(arr){
+
+    if (!Array.isArray(arr) ) {
+        // array does not exist, is not an array, or is empty
+        // ⇒ do not attempt to process array
+        console.log("NO ARRAY");
+    }else{
+        console.log("ARRAY");
+    }
+
+}
+
+/**
  * getType(p)
  *
  * Displays type of variable
@@ -60,40 +70,6 @@ function getType(p) {
     else if (p != null && typeof p == 'object') return 'object';
     else return 'other';
 }
-
-/**
- * create table of all user (for API)
- * // turn this thing into a function and have url as the parameter
- // get first page. Get "total_pages"
- // change url and count pages accordingly to get all users
- */
-function tableCreate(rowNum, colNum, userData){
-    // todo: have the userData be a 2d array
-    let body = document.body,
-        tbl  = document.createElement('table');
-    tbl.style.width  = '100px';
-    // tbl.style.border = '1px solid black';
-
-    for(let i = 0; i < rowNum; i++){
-        let tr = tbl.insertRow();
-        for(let j = 0; j < colNum; j++){
-            if(i === rowNum-1 && j === colNum-1){
-                break;
-            } else {
-                var td = tr.insertCell();
-                td.appendChild(document.createTextNode('Cell'));
-                td.style.border = '1px solid black';
-                if(i === 1 && j === 1){
-                    td.setAttribute('rowSpan', '2');
-                }
-            }
-        }
-    }
-    body.appendChild(tbl);
-
-    tableCreate();
-}
-//tableCreate();
 
 /**
  * jsonTest()
@@ -112,6 +88,66 @@ function jsonTest() {
 
 
 }
+
+/**
+ * create table of all users
+ */
+function tableCreate(userData) {
+    // time delay cause array would still be loading
+    //   by the time that other commands are compiled
+    setTimeout(function(){
+        console.log(userData.length);
+        console.log(userData[0].length);
+
+        let row = userData.length,
+            col = userData[0].length;
+
+        console.log("row: " + row, "col: " + col);
+
+    }, 200);
+}
+
+
+
+
+// /**
+//  * create table of all user (for API)
+//  * // turn this thing into a function and have url as the parameter
+//  // get first page. Get "total_pages"
+//  // change url and count pages accordingly to get all users
+//  */
+// function tableCreate(userData) {
+//     let rowNum = userData.length;
+//     let colNum = userData[0].length;
+//     let body = document.body,
+//         tbl  = document.createElement('table');
+//
+//     tbl.style.width  = '100px';
+//     // tbl.style.border = '1px solid black';
+//
+//     //creating actual table
+//     for(let i = 0; i < rowNum; i++){
+//         let tr = tbl.insertRow();
+//         for(let j = 0; j < colNum; j++){
+//             if(i === rowNum-1 && j === colNum-1){
+//                 break;
+//             } else {
+//                 var td = tr.insertCell();
+//                 // td.appendChild(document.createTextNode('Cell'));
+//                 // td.style.border = '1px solid black';
+//                 td.appendChild(document.createTextNode(userData[i][j]));
+//                 if(i === 1 && j === 1){
+//                     td.setAttribute('rowSpan', '2');
+//                 }
+//             }
+//         }
+//     }
+//     body.appendChild(tbl);
+//
+//     tableCreate();
+// }
+
+
 
 
 /**
