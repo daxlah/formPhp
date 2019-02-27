@@ -22,9 +22,11 @@
 
             let result = apiGet(url);
 
-            // console.log("Result: ", result);
-            //
-            // tableCreate(result);
+            console.log("Result: ", result);
+
+
+
+            tableCreate(result);
 
             //todo: display users in a table :P
 
@@ -33,6 +35,5 @@
         </script>
     </head>
     <body>
-<!--    <button onclick="apiTest()">Get Shibe</button>-->
     </body>
 </html>

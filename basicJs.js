@@ -39,7 +39,7 @@ function apiGet(url) {
         }
 
     });
-    // return userData;
+    return userData;
 
 
 }
@@ -97,16 +97,14 @@ function jsonTest() {
  * create table of all users
  */
 function tableCreate(userData) {
+    let img = document.createElement("img");
+
+
     // time delay cause array would still be loading
     //   by the time that other commands are compiled
     setTimeout(function(){
-        console.log(userData.length);
-        console.log(userData[0].length);
-
         let row = userData.length,
             col = userData[0].length;
-
-        console.log("row: " + row, "col: " + col);
 
         // todo: separate into getRow/getCol and create table
 
@@ -114,23 +112,66 @@ function tableCreate(userData) {
         // TABLE CREATION
         let body = document.body,
             tbl  = document.createElement('table');
-
         tbl.style.width  = '100px';
 
+        // //creating headers
+        // let tr = tbl.insertRow();
+        // let th = td.insertCell();
+        // th.appendChild(document.createTextNode("ID"));
+        // th = th.insertCell();
+        // th.appendChild(document.createTextNode("Last Name"));
+        // th = th.insertCell();
+        // th.appendChild(document.createTextNode("First Name"));
+        // th = th.insertCell();
+        // th.appendChild(document.createTextNode("Avatar"));
+
         //creating actual table
-        for(let i = 0; i < row; i++){
+        for(let i = 0; i < row; i++) {
             let tr = tbl.insertRow();
-            for(let j = 0; j < col; j++){
-                if(i === row-1 && j === col-1){
+            for(let j = 0; j < col; j++) {
+                if(i === row && j === col) {
                     break;
                 } else {
-                    var td = tr.insertCell();
+                    let td = tr.insertCell();
                     // td.appendChild(document.createTextNode('Cell'));
                     // td.style.border = '1px solid black';
+
                     td.appendChild(document.createTextNode(userData[i][j]));
-                    if(i === 1 && j === 1){
-                        td.setAttribute('rowSpan', '2');
+
+                    // // display image
+                    // // ERROR: Displays all the images in the bottom right corner?
+                    // if(j === col-1) {
+                    //     img.src = userData[i][j];
+                    //     td.appendChild(img);
+                    //
+                    //     console.log(userData[i][j]);
+                    //     console.log(img);
+                    //     console.log();
+                    //
+                    // }else{
+                    //     td.appendChild(document.createTextNode(userData[i][j]));
+                    // }
+
+                    //extra col to "add to database"
+                    if(j === col-1) {
+                        td = tr.insertCell();
+
+                        /**
+                         * AAAAH BOOTON D:<
+                         *
+                         * var btn = document.createElement('input');
+                         btn.type = "button";
+                         btn.className = "btn";
+                         btn.value = entry.email;
+                         btn.onclick = (function(entry) {return function() {chooseUser(entry);}})(entry);
+                         td.appendChild(btn);
+                         */
                     }
+
+
+                    // if(i === row-1 && j === col-1) {
+                    //     td.setAttribute('rowSpan', '2');
+                    // }
                 }
             }
         }
