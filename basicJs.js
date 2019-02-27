@@ -97,7 +97,8 @@ function jsonTest() {
  * create table of all users
  */
 function tableCreate(userData) {
-    let img = document.createElement("img");
+
+    let headers = ["ID", "Last Name", "First Name", "Avatar"];
 
 
     // time delay cause array would still be loading
@@ -112,18 +113,15 @@ function tableCreate(userData) {
         // TABLE CREATION
         let body = document.body,
             tbl  = document.createElement('table');
-        tbl.style.width  = '100px';
+        tbl.style.width  = '80%';
 
-        // //creating headers
-        // let tr = tbl.insertRow();
-        // let th = td.insertCell();
-        // th.appendChild(document.createTextNode("ID"));
-        // th = th.insertCell();
-        // th.appendChild(document.createTextNode("Last Name"));
-        // th = th.insertCell();
-        // th.appendChild(document.createTextNode("First Name"));
-        // th = th.insertCell();
-        // th.appendChild(document.createTextNode("Avatar"));
+        //creating headers
+        let tr = tbl.insertRow();
+        for(let i = 0; i < 4; i++){
+            let headerCell = document.createElement("TH");
+            headerCell.innerHTML = headers[i];
+            tr.appendChild(headerCell);
+        }
 
         //creating actual table
         for(let i = 0; i < row; i++) {
@@ -138,34 +136,32 @@ function tableCreate(userData) {
 
                     td.appendChild(document.createTextNode(userData[i][j]));
 
-                    // // display image
-                    // // ERROR: Displays all the images in the bottom right corner?
-                    // if(j === col-1) {
-                    //     img.src = userData[i][j];
-                    //     td.appendChild(img);
-                    //
-                    //     console.log(userData[i][j]);
-                    //     console.log(img);
-                    //     console.log();
-                    //
-                    // }else{
-                    //     td.appendChild(document.createTextNode(userData[i][j]));
-                    // }
+                    // display image
+                    // ERROR: Displays all the images in the bottom right corner?
+                    if(j === col-1) {
+                        let img = document.createElement("img");
+                        img.src = userData[i][j];
+                        td.appendChild(img);
 
+                        console.log(userData[i][j]);
+                        console.log(img);
+                        console.log();
+
+                    }
+
+                    //todo: post values into new php file
                     //extra col to "add to database"
                     if(j === col-1) {
                         td = tr.insertCell();
 
-                        /**
-                         * AAAAH BOOTON D:<
-                         *
-                         * var btn = document.createElement('input');
-                         btn.type = "button";
-                         btn.className = "btn";
-                         btn.value = entry.email;
-                         btn.onclick = (function(entry) {return function() {chooseUser(entry);}})(entry);
-                         td.appendChild(btn);
-                         */
+                        var btn = document.createElement('input');
+                        btn.type = "button";
+                        btn.value = "Add to Database";
+                        btn.onclick = (function() {
+                            window.location.href = "NEW.php";
+                        });
+                        td.appendChild(btn);
+
                     }
 
 
@@ -182,48 +178,6 @@ function tableCreate(userData) {
 
     }, 500);
 }
-
-
-
-
-// /**
-//  * create table of all user (for API)
-//  * // turn this thing into a function and have url as the parameter
-//  // get first page. Get "total_pages"
-//  // change url and count pages accordingly to get all users
-//  */
-// function tableCreate(userData) {
-//     let rowNum = userData.length;
-//     let colNum = userData[0].length;
-//     let body = document.body,
-//         tbl  = document.createElement('table');
-//
-//     tbl.style.width  = '100px';
-//     // tbl.style.border = '1px solid black';
-//
-//     //creating actual table
-//     for(let i = 0; i < rowNum; i++){
-//         let tr = tbl.insertRow();
-//         for(let j = 0; j < colNum; j++){
-//             if(i === rowNum-1 && j === colNum-1){
-//                 break;
-//             } else {
-//                 var td = tr.insertCell();
-//                 // td.appendChild(document.createTextNode('Cell'));
-//                 // td.style.border = '1px solid black';
-//                 td.appendChild(document.createTextNode(userData[i][j]));
-//                 if(i === 1 && j === 1){
-//                     td.setAttribute('rowSpan', '2');
-//                 }
-//             }
-//         }
-//     }
-//     body.appendChild(tbl);
-//
-//     tableCreate();
-// }
-
-
 
 
 /**
