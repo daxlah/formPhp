@@ -111,6 +111,7 @@ function tableCreate(userData) {
         let body = document.body,
             tbl  = document.createElement('table');
         tbl.style.width  = '80%';
+        tbl.id = "apiTable";
 
         //HEADER CREATION
         let tr = tbl.insertRow();
@@ -128,8 +129,6 @@ function tableCreate(userData) {
                     break;
                 } else {
                     let td = tr.insertCell();
-                    // td.appendChild(document.createTextNode('Cell'));
-                    // td.style.border = '1px solid black';
 
                     td.appendChild(document.createTextNode(userData[i][j]));
 
@@ -139,36 +138,44 @@ function tableCreate(userData) {
                         img.src = userData[i][j];
                         td.appendChild(img);
 
-                        console.log(userData[i][j]);
-                        console.log(img);
-                        console.log();
+                        // console.log(userData[i][j]);
+                        // console.log(img);
+                        // console.log();
 
                     }
 
                     // BOOTONS
                     if(j === col-1) {
                         td = tr.insertCell();
-
                         var btn = document.createElement('input');
                         btn.type = "button";
                         btn.value = "Add to Database";
+
                         btn.onclick = (function() {
-                            window.location.href = "NEW.php?id=" + userData[i][0] + "&lName=" + userData[i][1]
+                            //todo: block may be in the wrong section.  Tidy up the table more
+
+                            // // JQUERY POST
+                            // let form = $('<form action="addUser.php" method="post">' +
+                            //         '<input type="hidden" name="id" value="' + userData[i][0] + '" />' +
+                            //         '<input type="hidden" name="lName" value="' + userData[i][1] + '" />' +
+                            //         '<input type="hidden" name="fName" value="' + userData[i][2] + '" />' +
+                            //         '<input type="hidden" name="avatar" value="' + userData[i][3] + '" />' +
+                            //     '</form>');
+                            // td.appendChild(form);
+                            // form.submit();
+
+                            //GET
+                            window.location.href = "addUser.php?id=" + userData[i][0] + "&lName=" + userData[i][1]
                                 + "&fName=" + userData[i][2] + "&avatar=" + userData[i][3];
+
                         });
                         td.appendChild(btn);
-
                     }
-
-                    // JQUERY POST
                 }
             }
         }
         body.appendChild(tbl);
-
         tableCreate();
-
-
     }, 500);
 }
 

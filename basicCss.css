@@ -1,11 +1,12 @@
 
 *{
-    padding: 5px;
+
 
 }
 
 body {
     background-color: #fffafa;
+    margin: 0px;
 }
 
 textarea {
@@ -78,6 +79,16 @@ th {
     float: left;
     text-align: center;
     background-color: lightslategray;
+    padding: 3px 15px;
+    margin: 5px;
+}
+
+.navItems li:hover {
+    background-color: #8788AA;
+}
+
+#apiTable {
+    margin-left: 20px;
 }
 
 #mainForm {

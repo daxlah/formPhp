@@ -59,12 +59,12 @@
 
 
             }else{
-                echo "Something went wrong when uploading the file.<br>";
+//                echo "Something went wrong when uploading the file.<br>";
                 $validForm = false;
             }
 
         }else{
-            echo "File uploaded is not an image.<br>";
+//            echo "File uploaded is not an image.<br>";
             $validForm = false;
         }
 
@@ -126,7 +126,7 @@
 
 $conn = null;
 
-    require_once ("nav.php");
+require_once ("nav.php");
 
 ?>
 

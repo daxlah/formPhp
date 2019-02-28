@@ -1,11 +1,18 @@
 <?php
 
+if($_POST){
+    echo $_POST;
+}
+
+
+
+
 require_once ("nav.php");
 ?>
 
 <!DOCTYPE html>
 
-<html>
+    <html>
     <head>
 
         <script
@@ -15,17 +22,21 @@ require_once ("nav.php");
         <script src="basicJs.js"></script>
 
         <link rel="stylesheet" type="text/css" href="basicCss.css">
-        <title>API</title>
+        <title>Add User</title>
 
         <script>
-            let url = 'https://reqres.in/api/users?page=2';
-            let result = apiGet(url);
-
-            tableCreate(result);
 
 
         </script>
     </head>
     <body>
+    <?php
+        if($_GET){
+            echo $_GET['id'] . "<br>";
+            echo $_GET['fName'] . "<br>";
+            echo $_GET['lName'] . "<br>";
+            echo $_GET['avatar'] . "<br>";
+        }
+    ?>
     </body>
 </html>
