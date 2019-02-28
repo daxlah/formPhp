@@ -154,15 +154,21 @@ function tableCreate(userData) {
                         btn.onclick = (function() {
                             //todo: block may be in the wrong section.  Tidy up the table more
 
-                            // // JQUERY POST
-                            // let form = $('<form action="addUser.php" method="post">' +
-                            //         '<input type="hidden" name="id" value="' + userData[i][0] + '" />' +
-                            //         '<input type="hidden" name="lName" value="' + userData[i][1] + '" />' +
-                            //         '<input type="hidden" name="fName" value="' + userData[i][2] + '" />' +
-                            //         '<input type="hidden" name="avatar" value="' + userData[i][3] + '" />' +
-                            //     '</form>');
-                            // td.appendChild(form);
-                            // form.submit();
+                            // JQUERY POST
+                            let form = $('<form action="addUser.php" method="post">' +
+                                    '<input type="hidden" name="id" value="' + userData[i][0] + '" />' +
+                                    '<input type="hidden" name="lName" value="' + userData[i][1] + '" />' +
+                                    '<input type="hidden" name="fName" value="' + userData[i][2] + '" />' +
+                                    '<input type="hidden" name="avatar" value="' + userData[i][3] + '" />' +
+                                '</form>');
+                            td.appendChild(form);
+                            form.submit();
+
+                            // //SessionStorage
+                            // sessionStorage.setItem("id", userData[i][0]);
+                            // sessionStorage.setItem("lName", userData[i][1]);
+                            // sessionStorage.setItem("fName", userData[i][2]);
+                            // sessionStorage.setItem("avatar", userData[i][3]);
 
                             //GET
                             window.location.href = "addUser.php?id=" + userData[i][0] + "&lName=" + userData[i][1]
@@ -170,6 +176,8 @@ function tableCreate(userData) {
 
                         });
                         td.appendChild(btn);
+
+
                     }
                 }
             }
