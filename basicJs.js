@@ -107,15 +107,12 @@ function tableCreate(userData) {
         let row = userData.length,
             col = userData[0].length;
 
-        // todo: separate into getRow/getCol and create table
-
-
         // TABLE CREATION
         let body = document.body,
             tbl  = document.createElement('table');
         tbl.style.width  = '80%';
 
-        //creating headers
+        //HEADER CREATION
         let tr = tbl.insertRow();
         for(let i = 0; i < 4; i++){
             let headerCell = document.createElement("TH");
@@ -123,7 +120,7 @@ function tableCreate(userData) {
             tr.appendChild(headerCell);
         }
 
-        //creating actual table
+        //TABLE CREATION
         for(let i = 0; i < row; i++) {
             let tr = tbl.insertRow();
             for(let j = 0; j < col; j++) {
@@ -136,8 +133,7 @@ function tableCreate(userData) {
 
                     td.appendChild(document.createTextNode(userData[i][j]));
 
-                    // display image
-                    // ERROR: Displays all the images in the bottom right corner?
+                    // DISPLAY IMAGE
                     if(j === col-1) {
                         let img = document.createElement("img");
                         img.src = userData[i][j];
@@ -149,8 +145,7 @@ function tableCreate(userData) {
 
                     }
 
-                    //todo: post values into new php file
-                    //extra col to "add to database"
+                    // BOOTONS
                     if(j === col-1) {
                         td = tr.insertCell();
 
@@ -158,16 +153,14 @@ function tableCreate(userData) {
                         btn.type = "button";
                         btn.value = "Add to Database";
                         btn.onclick = (function() {
-                            window.location.href = "NEW.php";
+                            window.location.href = "NEW.php?id=" + userData[i][0] + "&lName=" + userData[i][1]
+                                + "&fName=" + userData[i][2] + "&avatar=" + userData[i][3];
                         });
                         td.appendChild(btn);
 
                     }
 
-
-                    // if(i === row-1 && j === col-1) {
-                    //     td.setAttribute('rowSpan', '2');
-                    // }
+                    // JQUERY POST
                 }
             }
         }
